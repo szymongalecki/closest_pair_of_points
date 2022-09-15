@@ -1,7 +1,8 @@
-# Closest points
+# Closest pair of points
 
-Parsing and visualising input. Point coordinates are temporarily stored in the list of tuples.  
+Quadratic implementation with result visualisation for testing purposes.
 
 ```
+cat rd100-tsp.txt | python3 cp.py
 cat eil101-tsp.txt | python3 cp.py
 ```
