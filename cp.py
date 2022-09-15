@@ -1,5 +1,11 @@
 import matplotlib.pyplot as plt
 
+"""
+run:
+cat rd100-tsp.txt | python3 cp.py
+cat eil101-tsp.txt | python3 cp.py
+"""
+
 # point coordinates are held in the list of tuples
 points = []
 i = input()
