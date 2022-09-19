@@ -12,14 +12,18 @@ i = input()
 
 # obtain point coordinates
 while i != "":
-    if i == "EOF":
-        break
-    elif i[0].isalpha():
+    if i[0].isalpha():
         pass
     else:
-        id, x, y = [float(_) for _ in i.split()]
-        points.append((x, y))
-    i = input().strip()
+        try:
+            id, x, y = [float(_) for _ in i.split()]
+            points.append((x, y))
+        except ValueError:
+            pass
+    try:
+        i = input().strip()
+    except EOFError:
+        break
 
 # find closest points
 min_d = float("inf")
