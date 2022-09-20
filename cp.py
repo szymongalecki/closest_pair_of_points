@@ -1,4 +1,6 @@
+from re import L
 import matplotlib.pyplot as plt
+import sys
 
 """
 run:
@@ -8,22 +10,34 @@ cat eil101-tsp.txt | python3 cp.py
 
 # point coordinates are held in the list of tuples
 points = []
-i = input()
 
-# obtain point coordinates
-while i != "":
-    if i[0].isalpha():
-        pass
-    else:
+# read using the passed function
+def read(i, func):
+    while i != "":
+        # try to obtaining coordinates
         try:
-            id, x, y = [float(_) for _ in i.split()]
-            points.append((x, y))
+            _, x, y = i.split()
+            points.append((float(x), float(y)))
         except ValueError:
             pass
-    try:
-        i = input().strip()
-    except EOFError:
-        break
+        # try obtaining the next line of input
+        try:
+            i = func()
+        except EOFError:
+            break
+
+
+# STDIN or file
+if len(sys.argv) > 1:
+    with open(sys.argv[1], "r") as reader:
+        i = reader.readline()
+        read(i, reader.readline)
+else:
+    i = input()
+    read(i, input)
+
+
+print(points)
 
 # find closest points
 min_d = float("inf")
@@ -38,17 +52,11 @@ for p1 in points:
                 min_d = d
                 min_points = [p1, p2]
 
-# left and right point
-if min_points[0][0] <= min_points[1][0]:
-    l, r = min_points[0], min_points[1]
-else:
-    l, r = min_points[1], min_points[0]
-
 # plot the result
 plt.style.use("grayscale")
 fig, ax = plt.subplots()
 fig.suptitle("Closest points", fontsize=16)
-ax.set_title(f"{l} - {r}", fontsize=12)
+ax.set_title(f"{min(min_points)} - {max(min_points)} = {min_d}", fontsize=12)
 for p in points:
     ax.scatter(p[0], p[1])
 ax.plot(

@@ -1,0 +1,7 @@
+#!/bin/sh
+for FILE in *in.txt
+
+do
+    echo $FILE
+    python3 cp.py $FILE
+done

@@ -1,0 +1,9 @@
+#!/bin/sh
+for FILE in *in.txt
+
+do
+    echo $FILE
+    cat $FILE | python3 cp.py >> pipe.txt
+    python3 cp.py $FILE >> file.txt
+    diff -w pipe.txt file.txt
+done
